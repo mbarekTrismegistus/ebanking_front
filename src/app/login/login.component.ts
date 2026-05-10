@@ -2,11 +2,12 @@ import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { AuthService } from '../services/auth.service';
 import { Router } from '@angular/router';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [ReactiveFormsModule],
+  imports: [ReactiveFormsModule, CommonModule],
   templateUrl: './login.component.html',
   styleUrl: './login.component.css'
 })
@@ -32,7 +33,7 @@ export class LoginComponent {
     this.authService.login(username, password).subscribe({
       next: (data: any) => {
         this.authService.loadProfile(data);
-        this.router.navigateByUrl('/admin/customers');
+        this.router.navigateByUrl('/customers');
       },
       error: (err: any) => {
         this.errorMessage = 'Invalid username or password';
